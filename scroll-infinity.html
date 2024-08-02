@@ -17,7 +17,6 @@
 			.scroll-container {
 				display: flex;
 				width: 200%;
-				animation: scrollPromotion linear 20s infinite both;
 			}
 			
 			.box-container {
@@ -30,7 +29,6 @@
 				scroll-behavior: smooth;
 				-webkit-overflow-scrolling: touch;
 				white-space: nowrap;
-				overflow-x: hidden;
 				width: calc(100% - 10px);
 				gap: 20px;
 			}
@@ -41,15 +39,6 @@
 				border: 1px solid;
 				align-items: center;
 				width: calc(20% - 20px);
-			}
-			
-			@keyframes scrollPromotion {
-				0% {
-					transform: translateX(0);
-				}
-				100% {
-					transform: translateX(-50%);
-				}
 			}
 		</style>
 	</head>
@@ -72,5 +61,20 @@
 				</div>
 			</div>
 		</div>
+		
+		<script>
+			const scrollContainer = document.querySelector('.scroll-container');
+			let scrollAmount = 0;
+			
+			function scrollLoop() {
+				scrollAmount -= 1;
+				if (scrollAmount <= -scrollContainer.clientWidth / 2) {
+					scrollAmount = 0;
+				}
+				scrollContainer.style.transform = `translateX(${scrollAmount}px)`;
+				requestAnimationFrame(scrollLoop);
+			}
+			requestAnimationFrame(scrollLoop);
+		</script>
 	</body>
 </html>
