@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+		<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+		<script src="https://cdn.tailwindcss.com"></script>
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>Scroll Promotion</title>
+		<style>
+			.scroll-wrapper {
+				overflow: hidden;
+				width: 100%;
+				position: relative;
+			}
+			
+			.scroll-container {
+				display: flex;
+				width: 100%;
+			}
+			
+			.box-container {
+				flex-wrap: wrap;
+				overflow: hidden;
+				margin: 0 auto;
+				align-items: center;
+				justify-content: center;
+				display: flex;
+				scroll-behavior: smooth;
+				-webkit-overflow-scrolling: touch;
+				white-space: nowrap;
+				width: calc(100% - 10px);
+				gap: 20px;
+			}
+			
+			.box {
+				justify-content: center;
+				display: flex;
+				border: 1px solid;
+				align-items: center;
+				width: 100%;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="scroll-wrapper py-5">
+			<div class="scroll-container flex flex-col h-40">
+				<div class="box-container flex flex-col">
+					<div class="box">Promotion 1</div>
+					<div class="box">Promotion 2</div>
+					<div class="box">Promotion 3</div>
+					<div class="box">Promotion 4</div>
+					<div class="box">Promotion 5</div>
+				</div>
+				<div class="box-container flex flex-col">
+					<div class="box">Promotion 1</div>
+					<div class="box">Promotion 2</div>
+					<div class="box">Promotion 3</div>
+					<div class="box">Promotion 4</div>
+					<div class="box">Promotion 5</div>
+				</div>
+			</div>
+		</div>
+		
+		<script>
+			const scrollContainer = document.querySelector('.scroll-container');
+			let scrollAmount = 0;
+			
+			function scrollLoop() {
+				scrollAmount -= 1;
+				if (scrollAmount <= -scrollContainer.clientHeight / 2) {
+					scrollAmount = 0;
+				}
+				scrollContainer.style.transform = `translateY(${scrollAmount}px)`;
+				requestAnimationFrame(scrollLoop);
+			}
+			requestAnimationFrame(scrollLoop);
+		</script>
+	</body>
+</html>
